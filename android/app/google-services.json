@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681885628519",
+    "project_id": "fiba-quiz",
+    "storage_bucket": "fiba-quiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681885628519:android:6a5e7a50b5759da710bcc2",
+        "android_client_info": {
+          "package_name": "com.example.fiba_quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681885628519-qak4ijm8pjn6p9q5d8ohd2vk1c45q0si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPExAB2hCX6acFGX4IZU14_TNuminRYAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681885628519-qak4ijm8pjn6p9q5d8ohd2vk1c45q0si.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
