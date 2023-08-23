@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fiba_quiz/features/auth/presentation/components/buttons.dart';
-import 'package:fiba_quiz/features/auth/presentation/pages/admin_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/validator/auth_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpPage extends StatefulWidget {
-  static const String id = "registrati";
+class ForgotPasswordPage extends StatefulWidget {
+  static const String id = "password-dimenticata";
   String _signupError = "";
 
-  SignUpPage({super.key});
+  ForgotPasswordPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final GlobalKey<FormState> _signUpGlobalKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   bool passwordSee = true;
 
   @override
@@ -48,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     SizedBox(width: 10),
                     Text(
-                      "Inserisci i tuoi dati",
+                      "Inserisci il tuo indirizzo email",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -67,29 +65,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         hintText: "indirizzo email",
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: passwordSee,
-                      validator: AuthValidator.isPasswordValid,
-                      decoration: InputDecoration(
-                        hintText: "password",
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            passwordSee = !passwordSee;
-                            setState(() {});
-                          },
-                          child: Icon(
-                            passwordSee
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined,
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 120),
                     PrimaryButton(
-                      text: "Continua",
+                      text: "Invia email",
                       onPressed: signUpButton,
                     ),
                     const SizedBox(height: 40),
@@ -97,10 +75,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       widget._signupError,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: widget._signupError ==
-                                'Registrazione avvenuta con successo'
-                            ? Color(0xFF00B800)
-                            : Color(0xFFE60000),
+                        color:
+                            widget._signupError == 'Email inviata con successo'
+                                ? Color(0xFF00B800)
+                                : Color(0xFFE60000),
                         letterSpacing: 0.5,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -125,18 +103,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
     if (_signUpGlobalKey.currentState!.validate()) {
       try {
-        final credential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        await FirebaseAuth.instance.sendPasswordResetEmail(
           email: emailController.text.trim(),
-          password: passwordController.text.trim(),
         );
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          signupError = 'La password è troppo debole.';
-        } else if (e.code == 'email-already-in-use') {
-          signupError = 'L\'account esiste già per quell\'indirizzo email.';
-        }
-      } catch (e) {
         signupError = 'Errore sconosciuto: contattare l\'assistenza.';
       }
 
@@ -146,10 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       } else {
         setState(() {
-          widget._signupError = "Registrazione avvenuta con successo";
+          widget._signupError = "Email inviata con successo";
         });
-
-        Navigator.pushNamed(context, AdminPage.id);
       }
     }
   }
@@ -157,7 +125,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     emailController.dispose();
-    passwordController.dispose();
     super.dispose();
   }
 }

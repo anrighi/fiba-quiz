@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
 
-class MyButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
+  final String text;
+  final void Function()? onPressed;
+  const PrimaryButton({
+    super.key,
+    required this.text,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        minimumSize: const Size(double.infinity, 60),
+        backgroundColor: const Color(0xFF265AE8),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+        ),
+      ),
+    );
+  }
+}
+
+class SecondaryButton extends StatelessWidget {
   final void Function()? onPressed;
   final String? iconUrl;
   final String text;
-  const MyButton({
+  const SecondaryButton({
     super.key,
     this.onPressed,
     this.iconUrl,
@@ -51,14 +79,16 @@ class MyButton extends StatelessWidget {
   }
 }
 
-class MyButtonTwo extends StatelessWidget {
+class StringButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
-  const MyButtonTwo({
-    super.key,
-    required this.text,
-    this.onPressed,
-  });
+  final MaterialColor color;
+
+  const StringButton(
+      {super.key,
+      required this.text,
+      this.onPressed,
+      this.color = Colors.blue});
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +96,12 @@ class MyButtonTwo extends StatelessWidget {
       onPressed: onPressed,
       style: TextButton.styleFrom(
         minimumSize: const Size(double.infinity, 60),
-        backgroundColor: const Color(0xFF265AE8),
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20,
+        style: TextStyle(
+          color: color,
+          fontSize: 16,
         ),
       ),
     );

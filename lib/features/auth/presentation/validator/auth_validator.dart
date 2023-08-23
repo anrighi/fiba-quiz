@@ -8,10 +8,10 @@ class AuthValidator {
   }
 
   static String? isPasswordValid(String? text) {
-    if (text != null && text.length > 8) {
+    if (text != null) {
       return null;
     } else {
-      return "La password deve avere più di 8 caratteri";
+      return "La password non è valida";
     }
   }
 }

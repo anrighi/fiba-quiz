@@ -1,3 +1,4 @@
+import 'package:fiba_quiz/features/auth/presentation/components/buttons.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/validator/auth_validator.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,8 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController(
+      text: FirebaseAuth.instance.currentUser?.displayName);
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,12 @@ class _AdminPageState extends State<AdminPage> {
             children: [
               const SizedBox(height: 40),
               TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: "nome",
+                ),
+              ),
+              TextFormField(
                 initialValue: FirebaseAuth.instance.currentUser?.email,
                 readOnly: true,
                 validator: AuthValidator.isEmailValid,
@@ -53,6 +60,11 @@ class _AdminPageState extends State<AdminPage> {
                   hintText: "indirizzo email",
                 ),
               ),
+              const SizedBox(height: 120),
+              PrimaryButton(
+                text: "Salva",
+                onPressed: saveFirebaseData,
+              )
             ],
           ),
         ),
@@ -63,5 +75,11 @@ class _AdminPageState extends State<AdminPage> {
   void logOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushNamed(context, SignInPage.id);
+  }
+
+  void saveFirebaseData() async {
+    if (FirebaseAuth.instance.currentUser?.displayName != nameController.text) {
+      FirebaseAuth.instance.currentUser?.updateDisplayName(nameController.text);
+    }
   }
 }

@@ -41,12 +41,12 @@ class _IntroPageState extends State<IntroPage> {
             ),
             /*Column(
               children: const [
-                MyButton(
+                SecondaryButton(
                   iconUrl: 'assets/images/ic_google.png',
                   text: "Registrati con Google",
                 ),
                 SizedBox(height: 20),
-                MyButton(
+                SecondaryButton(
                   iconUrl: 'assets/images/ic_facebook.png',
                   text: "Registrati con Facebook",
                 ),
@@ -63,7 +63,7 @@ class _IntroPageState extends State<IntroPage> {
             const SizedBox(height: 20),
             Column(
               children: [
-                MyButton(
+                SecondaryButton(
                   onPressed: () {
                     Navigator.pushNamed(context, SignUpPage.id);
                   },

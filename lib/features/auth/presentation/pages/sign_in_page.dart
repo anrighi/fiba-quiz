@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/admin_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/app_widget.dart';
+import 'package:fiba_quiz/features/auth/presentation/pages/forgot_password_page.dart';
+import 'package:fiba_quiz/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/validator/auth_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -49,12 +51,12 @@ class _SignInPageState extends State<SignInPage> {
             ),
             /*Column(
               children: const [
-                MyButton(
+                SecondaryButton(
                   iconUrl: 'assets/images/ic_google.png',
                   text: "Log in with Google",
                 ),
                 SizedBox(height: 20),
-                MyButton(
+                SecondaryButton(
                   iconUrl: 'assets/images/ic_facebook.png',
                   text: "Log in with Google",
                 ),
@@ -117,16 +119,12 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 40),
             Column(
               children: [
-                MyButtonTwo(text: "Accedi", onPressed: signIn),
+                PrimaryButton(text: "Accedi", onPressed: signIn),
                 const SizedBox(height: 30),
-                const Text(
-                  "Hai dimenticato la password?",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                    color: Color(0xFF265AE8),
-                  ),
-                ),
+                StringButton(
+                    text: "Hai dimenticato la password?",
+                    onPressed: redirectToForgotPassword),
+                StringButton(text: "Registrati", onPressed: redirectToSignUp),
               ],
             ),
           ],
@@ -172,6 +170,14 @@ class _SignInPageState extends State<SignInPage> {
         Navigator.pushNamed(context, AdminPage.id);
       }
     }
+  }
+
+  void redirectToSignUp() {
+    Navigator.pushNamed(context, SignUpPage.id);
+  }
+
+  void redirectToForgotPassword() {
+    Navigator.pushNamed(context, ForgotPasswordPage.id);
   }
 
   @override

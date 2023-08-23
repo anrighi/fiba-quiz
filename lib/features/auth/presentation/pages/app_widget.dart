@@ -3,6 +3,7 @@ import 'package:fiba_quiz/features/auth/presentation/pages/admin_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/intro_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:fiba_quiz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:fiba_quiz/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AppWidget extends StatefulWidget {
@@ -26,6 +27,7 @@ class _AppWidgetState extends State<AppWidget> {
         SignUpPage.id: (context) => SignUpPage(),
         SignInPage.id: (context) => SignInPage(),
         AdminPage.id: (context) => const AdminPage(),
+        ForgotPasswordPage.id: (context) => ForgotPasswordPage(),
       },
     );
   }
